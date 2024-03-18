@@ -6,6 +6,7 @@ import datetime
 from forms.user import RegisterForm, LoginForm
 from forms.news import NewsForm
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+import os
 
 
 app = Flask(__name__)
@@ -147,7 +148,9 @@ def index():
 
 def main():
     db_session.global_init("db/blogs.db")
-    app.run(port=8080, host='127.0.0.1')
+    # app.run(port=8080, host='127.0.0.1')
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host='0.0.0.0', port=port)
 
 
 if __name__ == '__main__':
